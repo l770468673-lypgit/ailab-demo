@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:focusable="true"
+    tools:context="com.openailab.ailab.ui.FullscreenActivity">
+
+    <com.openailab.ailab.widget.CameraTextureView
+        android:id="@+id/rView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintDimensionRatio=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.openailab.ailab.widget.RectView
+        android:id="@+id/rectView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/rView"
+        app:layout_constraintEnd_toEndOf="@id/rView"
+        app:layout_constraintStart_toStartOf="@id/rView"
+        app:layout_constraintTop_toTopOf="@id/rView" />
+
+    <ImageView
+        android:id="@+id/iv_top_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@mipmap/ic_top_bg_notext"
+        app:layout_constraintDimensionRatio="540:135"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您好，请配合体温测试"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/iv_top_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_top_bg" />
+
+    <ImageView
+        android:id="@+id/iv_bottom_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_bottom_bg"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_bottom_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/ic_bottom_left"
+        app:layout_constraintStart_toStartOf="@id/iv_bottom_bg"
+        app:layout_constraintTop_toTopOf="@id/iv_bottom_bg" />
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="2020年20月20日 20:20:20"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_welcome"
+        app:layout_constraintEnd_toEndOf="@id/iv_bottom_bg"
+        app:layout_constraintStart_toStartOf="@id/iv_bottom_bg"
+        app:layout_constraintTop_toTopOf="@id/iv_bottom_bg"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_warn"
+        android:drawablePadding="20dp"
+        android:text="欢迎光临，请刷脸通行"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bottom_bg"
+        app:layout_constraintEnd_toEndOf="@id/iv_bottom_bg"
+        app:layout_constraintStart_toStartOf="@id/iv_bottom_bg"
+        app:layout_constraintTop_toBottomOf="@id/time" />
+
+
+    <ImageView
+        android:id="@+id/iv_bottom_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@mipmap/ic_bottom_right"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bottom_bg"
+        app:layout_constraintEnd_toEndOf="@id/iv_bottom_bg" />
+
+    <View
+        android:id="@+id/vFeature"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/shape_round_write"
+        app:layout_constraintBottom_toTopOf="@id/iv_bottom_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.openailab.ailab.widget.RoundImageView
+        android:id="@+id/ivHead"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="23dp"
+        android:background="@mipmap/ic_bottom_bg"
+        app:layout_constraintBottom_toBottomOf="@id/vFeature"
+        app:layout_constraintStart_toStartOf="@id/vFeature"
+        app:layout_constraintTop_toTopOf="@id/vFeature" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="OPEN AI LAB"
+        android:textColor="@android:color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvJobNum"
+        app:layout_constraintStart_toEndOf="@id/ivHead"
+        app:layout_constraintTop_toTopOf="@id/ivHead"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvJobNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="111111111"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivHead"
+        app:layout_constraintStart_toStartOf="@id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="vFeature,ivHead,tvName,tvJobNum" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_qrFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button_visitor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="196dp"
+            android:text="访客入口"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="@+id/imageView6"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:background="#80353535"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:background="#80353535"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:background="#80353535"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:background="#80353535"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
