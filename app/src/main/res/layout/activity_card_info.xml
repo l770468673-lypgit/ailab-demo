@@ -85,11 +85,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="地址：" />
+
             <TextView
                 android:id="@+id/textView_guest_heat_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="体温：" />
+
+            <TextView
+                android:id="@+id/textView_date_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="日期：" />
         </LinearLayout>
 
         <LinearLayout
@@ -157,40 +164,89 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="36.0" />
+
+            <TextView
+                android:id="@+id/textView_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="xx年x月  x日  " />
         </LinearLayout>
 
     </LinearLayout>
 
-    <ExpandableListView
-        android:id="@+id/expendlist"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <!--    <ExpandableListView-->
+    <!--        android:id="@+id/expendlist"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
+
+    <LinearLayout
+        android:id="@+id/lly_lin1"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#319CF1"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="请输入您的手机号："
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/lly_lin1" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextphone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toRightOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <LinearLayout
+        android:id="@+id/lly_lin2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#319CF1"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextphone" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择您的职业："
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lly_lin2" />
+
+    <Spinner
+        android:background="@null"
+        android:id="@+id/Spinner8"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
 
     <Button
         android:id="@+id/button_register"
@@ -200,7 +256,7 @@
         android:text="确认"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/Spinner8" />
 
     <Button
         android:id="@+id/button_cancel_register"

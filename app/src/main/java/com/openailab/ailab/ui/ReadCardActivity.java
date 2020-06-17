@@ -78,7 +78,7 @@ public class ReadCardActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     intent.setClass(getBaseContext(), CardInfoActivity.class);
                     startActivity(intent);
-                    FaceUtils.getInstance().getSpeaker().speak("读卡成功，请输入手机号");
+                    FaceUtils.getInstance().getSpeaker().speak("读卡成功，请填写相关信息");
                     timer.cancel();
                     finish();
                     //        bundle.putFloat("guest_heat", valueOf);

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.zxing.Result;
+import com.openailab.ailab.DaoManager;
+import com.openailab.ailab.DaoSession;
+import com.openailab.ailab.dao.UserInfos;
 import com.openailab.ailab.function.Consumer;
 import com.openailab.ailab.serialport.MyFunc;
 import com.openailab.ailab.serialport.SerialHelper;
@@ -26,7 +29,10 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -106,19 +112,19 @@ public class FaceUtils {
         this.mInformation = mInformation;
     }
 
-    public void setSpeaker(Speaker speaker){
+    public void setSpeaker(Speaker speaker) {
         this.mSpeaker = speaker;
     }
 
-    public Speaker getSpeaker(){
+    public Speaker getSpeaker() {
         return this.mSpeaker;
     }
 
-    public void detectQRCode(){
+    public void detectQRCode() {
         Bitmap bitmap = Bitmap.createBitmap(srcMatR.width(), srcMatR.height(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(srcMatR, bitmap);
-        Result result =  com.openailab.ailab.utils.Utils.decodeQR(bitmap);
-        if(result != null){
+        Result result = com.openailab.ailab.utils.Utils.decodeQR(bitmap);
+        if (result != null) {
             //TODO 判断二维码是否有效并将温度写入数据库
             mStateClickListener.accept(STATE_NO_DETECT, "wear");
             mSpeaker.speak("记录成功，请通行");
@@ -130,8 +136,8 @@ public class FaceUtils {
         if (!srcMatR.empty() && !mInformation) {
             Imgproc.cvtColor(srcMatR, matR, Imgproc.COLOR_YUV2RGBA_NV12, 4);
             Core.transpose(matR, matR);
-//            Core.flip(matR, matR, 0);
-//            Imgcodecs.imwrite("/sdcard/openailab/matR.jpg", matR);
+            //            Core.flip(matR, matR, 0);
+            //            Imgcodecs.imwrite("/sdcard/openailab/matR.jpg", matR);
             Image image = FaceAPP.getInstance().new Image();
             image.matAddrframe = matR.getNativeObjAddr();
             int detect = mFace.Detect(image, mFaceInfos, result);
@@ -156,11 +162,11 @@ public class FaceUtils {
 
                         float[] feature = mFace.GetFeature(image.matAddrframe);
                         float[] score = new float[1];
-                        if(feature != null){
+                        if (feature != null) {
                             String name = mFace.QueryDB(feature, score);
                             Log.i(TAG, "detect: name = " + name + " score = " + score[0]);
-                            if(score[0] < 0.7f){
-                                Bundle bundle= new Bundle();
+                            if (score[0] < 0.7f) {
+                                Bundle bundle = new Bundle();
                                 bundle.putFloat("guest_heat", valueOf);
                                 Intent intent = new Intent(context, ReadCardActivity.class);
                                 intent.putExtra("face_feature", feature);
@@ -168,17 +174,27 @@ public class FaceUtils {
 
                                 context.startActivity(intent);
                                 mSpeaker.speak("新朋友，请刷身份证注册");
-                                Log.i(TAG, "valueOf   = " + valueOf  );
-                            }else{
+                                Log.i(TAG, "valueOf   = " + valueOf);
+                                Log.i(TAG, "face_feature   = " + feature);
+                                Log.i(TAG, "face_feature   = " + feature.length);
+                                //                                init(feature);
+
+                            } else {
                                 mStateClickListener.accept(STATE_NORMAL, temperature);
                                 mRectView.setState(STATE_NORMAL);
                                 mSpeaker.speak("体温正常, 请通行");
+                                DaoSession daoSession = DaoManager.getDaoSession();
+                                UserInfos userInfos = new UserInfos(name, "无", "暂无",
+                                        "男", getNowDate(), temperature);
+
+                                daoSession.insertOrReplace(userInfos);
+
                             }
                         }
 
                         /*比对方案 END*/
-//                        mStateClickListener.accept(STATE_NORMAL,"wearMask");
-//                        mSpeaker.speak("体温正常, 请出示您的健康码");
+                        //                        mStateClickListener.accept(STATE_NORMAL,"wearMask");
+                        //                        mSpeaker.speak("体温正常, 请出示您的健康码");
 
 
                     } else if (valueOf > 35 && valueOf <= 36 || valueOf > 37.5) {
@@ -229,4 +245,45 @@ public class FaceUtils {
         ));
     }
 
+    public static void init(float[] feature) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < feature.length; i++) {
+            stringBuilder.append(feature[i] + " ");
+        }
+        String s = stringBuilder.toString();
+        Log.d(TAG, "feature.ts===" + s);
+        System.out.println("init:" + s);
+
+        //        toBack(stringBuilder.toString());
+    }
+
+    public static void toBack(String string) {
+        String[] strings = string.split(" ");
+        float[] fs = new float[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            fs[i] = Float.parseFloat(strings[i]);
+        }
+
+        System.out.println("toBack:" + Arrays.toString(fs));
+        for (float f : fs) {
+            System.out.println(f);
+        }
+    }
+
+    private String getNowDate() {
+        Date date = new Date();
+
+        String time = date.toLocaleString();
+
+        Log.i("md", "时间time为： " + time);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分 E");
+
+        String sim = dateFormat.format(date);
+
+
+        Log.i("md", "时间sim为： " + sim);
+        return sim;
+    }
 }
